@@ -21,7 +21,7 @@ for file_num = 1:numel(files)
             eye = 'right';
         end
         
-        output_filename = fullfile('pupil_data', ['pupil_step-1_eye-' eye '_sub-' files(file_num).name '.mat']);
+        output_filename = fullfile('pupil_data', ['pupil_step-1_eye-' eye '_sub-' files(file_num).name(1:end-4)  '.mat']);
         if exist(output_filename, 'file')
             continue
         end
@@ -33,24 +33,24 @@ for file_num = 1:numel(files)
             S(S_num).data.sample = double(V.FSAMPLE.pa(eye_num,V.FSAMPLE.time > start_times(S_num) & V.FSAMPLE.time < end_times(S_num))');
             
             %% Filter parameters:
-            S(S_num).filter_config.sub_nums = 1;
-            S(S_num).filter_config.resample_rate = 1000;
-            S(S_num).filter_config.resample_multiplier = 1;
-            S(S_num).filter_config.detect_blinks = 1;
-            S(S_num).filter_config.filter_order = 100;       % just going to use 30% of sample rate rule of thumb
-            S(S_num).filter_config.peak_boundary_threshold = 0;
-            S(S_num).filter_config.trough_boundary_threshold = 0;
-            S(S_num).filter_config.passband_freq = 1;
-            S(S_num).filter_config.stopband_freq = 40;
-            S(S_num).filter_config.peak_threshold_factor = 5;
-            S(S_num).filter_config.trough_threshold_factor = 5;
-            S(S_num).filter_config.detect_invalid_samples = 0;
-            S(S_num).filter_config.front_padding = .1;
-            S(S_num).filter_config.rear_padding = .1;
-            S(S_num).filter_config.merge_invalids_gap = 0;
-            S(S_num).filter_config.merge_artifacts_gap = 0.2;
-            S(S_num).filter_config.max_artifact_duration = 2;
-            S(S_num).filter_config.max_artifact_treatment = 'NaN Impute';
+%             S(S_num).filter_config.sub_nums = 1;
+%             S(S_num).filter_config.resample_rate = 1000;
+%             S(S_num).filter_config.resample_multiplier = 1;
+%             S(S_num).filter_config.detect_blinks = 1;
+%             S(S_num).filter_config.filter_order = 100;       % just going to use 30% of sample rate rule of thumb
+%             S(S_num).filter_config.peak_boundary_threshold = 0;
+%             S(S_num).filter_config.trough_boundary_threshold = 0;
+%             S(S_num).filter_config.passband_freq = 1;
+%             S(S_num).filter_config.stopband_freq = 40;
+%             S(S_num).filter_config.peak_threshold_factor = 5;
+%             S(S_num).filter_config.trough_threshold_factor = 5;
+%             S(S_num).filter_config.detect_invalid_samples = 0;
+%             S(S_num).filter_config.front_padding = .1;
+%             S(S_num).filter_config.rear_padding = .1;
+%             S(S_num).filter_config.merge_invalids_gap = 0;
+%             S(S_num).filter_config.merge_artifacts_gap = 0.2;
+%             S(S_num).filter_config.max_artifact_duration = 2;
+%             S(S_num).filter_config.max_artifact_treatment = 'NaN Impute';
         end
         
         save(output_filename,'S');
